@@ -3,8 +3,8 @@
         tomorrow: dateDescription === '明天',
         theDayAfterTomorrow: dateDescription === '后天' || dateDescription === '未来',
     }">
-        <div class="date" v-if="PostersSorted.length !== 0">
-            {{dateDescription}} {{ PostersSorted[0].date != '66-66-66' ? PostersSorted[0].date : '' }}
+        <div class="date" v-if="PostersSorted.length !== 0 && PostersSorted[0].date != '66-66-66'">
+            {{dateDescription}} {{PostersSorted[0].date}}
         </div>
         <template v-for="(i,idx) in PostersSorted">
             <Poster v-if="i.itemType === 'note'" :noShell="i.date === '66-66-66'" :inClamp='i.inClamp !== -1'

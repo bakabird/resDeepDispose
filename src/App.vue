@@ -11,8 +11,8 @@
       <div>{{announcement}}</div>
       <!-- <div>个人维护，更新不及时见谅</div> -->
       <form class='filter'>
-        <label class='mainItem Latest' :class="{'itemActived': filter === 'Latest'}" for="Latest">
-          <input id='Latest' name='filter' v-model="filter" type='radio' value='Latest' />最近更新</label>
+        <label class='mainItem Fresh' :class="{'itemActived': filter === 'Fresh'}" for="Fresh">
+          <input id='Fresh' name='filter' v-model="filter" type='radio' value='Fresh' />最近更新</label>
         <!-- sec line -->
         <label class='item No' :class="{'itemActived': filter === 'No'}" for="No">
           <input id='No' name='filter' v-model="filter" type='radio' value='No' />全部</label>
@@ -50,7 +50,7 @@
   @Component({
     data() {
       return {
-        filter: 'Latest',
+        filter: 'Fresh',
         announcement: store.get('announcement') || '',
         newAnnouncement: '',
       }

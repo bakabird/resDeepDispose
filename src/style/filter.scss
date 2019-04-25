@@ -2,11 +2,13 @@ $filter_border_color: #ffb9b9;
 $filter_normal_color: #ea8186;
 $filter_active_color: #e7484f;
 $filter_active_bgcolor: #fdf0ea;
+$filter_active_border_color: #dda3a5;
 
 .filter {
   display: flex;
-  border: 1px solid $filter_border_color;
-  border-right: none;
+  border-top: 1px solid $filter_border_color;
+  border-left: 1px solid $filter_border_color;
+  // border-right: none;
   color: $filter_normal_color;
   border-radius: 4px;
   width: 100%;
@@ -15,11 +17,6 @@ $filter_active_bgcolor: #fdf0ea;
   margin: 5px auto;
   label{
     margin: 2px 0;
-  }
-  .itemActived{
-    background: $filter_active_bgcolor;
-    color: $filter_active_color;
-    font-weight: bold;
   }
   .mainItem{
     width: 100%;
@@ -30,13 +27,14 @@ $filter_active_bgcolor: #fdf0ea;
     width: 25%;
     box-sizing: border-box;
     border-right: 1px solid $filter_border_color;
+    border-bottom:1px solid $filter_border_color;
   }
   // sec-line
   .No,
   .Variety,
   .GroupVariety,
   .Stage{
-    border-bottom: 1px solid $filter_border_color;
+    // border-bottom: 1px solid $filter_border_color;
   }
   // third-line
   .Live,
@@ -44,6 +42,15 @@ $filter_active_bgcolor: #fdf0ea;
   .Radio,
   .Ceremony{
   }
+  .itemActived{
+    background: $filter_active_bgcolor;
+    color: $filter_active_color;
+    border-bottom:1px solid $filter_active_border_color;
+    border-right: 1px solid $filter_active_border_color;
+    font-weight: bold;
+  }
+  
+
 }
 
 

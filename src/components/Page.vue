@@ -3,28 +3,20 @@
         tomorrow: dateDescription === '明天',
         theDayAfterTomorrow: dateDescription === '后天' || dateDescription === '未来',
     }">
-        <div class="date" v-if="GoldChainSorted.length !== 0">
-            {{dateDescription}} {{ GoldChainSorted[0].date != '66-66-66' ? GoldChainSorted[0].date : '' }}
+        <div class="date" v-if="PostersSorted.length !== 0">
+            {{dateDescription}} {{ PostersSorted[0].date != '66-66-66' ? PostersSorted[0].date : '' }}
         </div>
-        <template v-for="(i,idx) in GoldChainSorted">
-            <template v-if="!i.edit">
-                <Poster v-if="i.itemType === 'note' && (rdd || clampOpened[i.inClamp])" :noShell="i.date === '66-66-66'"
-                    :inClamp='i.inClamp !== -1' :key="i.id + '_poster_' + idx" :sqlId="i.id" :mainUrl='i.mainUrl'
-                    :date="i.date" :name="i.name" :site="i.site" :up="i.up" :tag="i.tag" :ep="i.ep" :part="i.part"
-                    :index="i.index" :bakedTime="i.bakedTime" :isRaw="i.isRaw" :isCut="i.isCut" :members="i.members" />
-                <button v-if='rdd' :key="`${i.id}_toEditBtn`" @click="toEdit(i.posterNo)">编辑【{{i.id}}】</button>
-                <div :key="i.id + '_goldCushion_' + idx"
-                    v-if="!rdd && i.itemType === 'cushion' && clampOpened[i.inClamp]"
-                    @click="clampOpened[i.inClamp] = false" class='bar cushion'>合上夹子</div>
-                <Clamp v-if="i.itemType === 'clamp'" @triggle="clampOpened[i.id] = !clampOpened[i.id]"
-                    :hasOpen="clampOpened[i.id]" :noShell="i.date === '66-66-66'" :key="i.id + '_clamp_' + idx"
-                    :sqlId="i.id" :mainUrl='i.mainUrl' :name="i.name" :tag="i.tag" :ep="i.ep" :part="i.part"
-                    :index="i.index" :bakedTime="i.bakedTime" :members="i.members" />
-            </template>
-            <Molecule v-else :sites="Sites" :tags="Tags" :key="i.id + '_molecule_' + idx" :sqlId="i.id"
-                :itemType='i.itemType' :mainUrl='i.mainUrl' :date="i.date" :name="i.name" :site="i.site" :up="i.up"
-                :tag="i.tag" :ep="i.ep" :part="i.part" :index="i.index" :isRaw="i.isRaw" :isCut="i.isCut"
-                :members="i.members" @finishEdit="$emit('finishEdit')" />
+        <template v-for="(i,idx) in PostersSorted">
+            <Poster v-if="i.itemType === 'note'" :noShell="i.date === '66-66-66'" :inClamp='i.inClamp !== -1'
+                :key="i.id + '_poster_' + idx" :sqlId="i.id" :mainUrl='i.mainUrl' :date="i.date" :name="i.name"
+                :site="i.site" :up="i.up" :tag="i.tag" :ep="i.ep" :part="i.part" :index="i.index"
+                :bakedTime="i.bakedTime" :isRaw="i.isRaw" :isCut="i.isCut" :members="i.members" />
+            <div :key="i.id + '_goldCushion_' + idx" v-if="i.itemType === 'cushion' && clampOpened[i.inClamp]"
+                @click="clampOpened[i.inClamp] = false" class='bar cushion'>合上夹子</div>
+            <Clamp v-if="i.itemType === 'clamp'" @triggle="clampOpened[i.id] = !clampOpened[i.id]"
+                :hasOpen="clampOpened[i.id]" :noShell="i.date === '66-66-66'" :key="i.id + '_clamp_' + idx"
+                :sqlId="i.id" :mainUrl='i.mainUrl' :name="i.name" :tag="i.tag" :ep="i.ep" :part="i.part"
+                :index="i.index" :bakedTime="i.bakedTime" :members="i.members" />
         </template>
     </div>
 </template>
@@ -33,7 +25,6 @@
 
     import Poster from './Poster.vue'
     import Clamp from './Clamp.vue'
-    import Molecule from './Molecule.vue'
 
     import moment from 'moment'
 
@@ -43,15 +34,22 @@
             return {
                 clampOpened: {
 
-                }
-            }
-        },
-        methods: {
-            toEdit(posterNo) {
-                this.$emit('edit', posterNo)
+                },
             }
         },
         computed: {
+            clampMarkBook() {
+                const posters = this.PageContent
+                const newClampMarkBook = {}
+                posters.map(poster => {
+                    const inClamp = poster.inClamp
+                    if (inClamp != -1) {
+                        newClampMarkBook[inClamp] = newClampMarkBook[inClamp] || []
+                        newClampMarkBook[inClamp].push(poster)
+                    }
+                })
+                return newClampMarkBook
+            },
             dateDescription() {
                 const posters = this.PageContent
                 const date = posters[0].date
@@ -79,52 +77,43 @@
                 }
                 return dateDescription
             },
-            GoldChainSorted() {
-                const pageSorted = []
-
-                const clampOpened = {
-                    '-1': true
-                }
-                const clampMarkBook = {}
-                const pagePosters = this.PageContent.filter(poster => {
-                    const inClamp = poster.inClamp
-                    if (inClamp !== -1) {
-                        clampOpened[inClamp] = clampOpened[inClamp] || false
-                        clampMarkBook[inClamp] = clampMarkBook[inClamp] || []
-                        clampMarkBook[inClamp].push(poster)
-                    }
-                    return inClamp === -1
+            PostersSorted() {
+                let pageSorted = []
+                const pagePosters = this.PageContent
+                const pagePostersWithoutPostersInClamp = this.PageContent.filter((poster) => {
+                    return poster.inClamp === -1;
                 })
-                this.clampOpened = clampOpened
+                const clampMarkBook = this.clampMarkBook
+                const clampOpened = this.clampOpened
 
-
-                for (const poster of pagePosters) {
+                for (const poster of pagePostersWithoutPostersInClamp) {
                     pageSorted.push(poster)
                     if (poster.itemType === 'clamp') {
                         const id = poster.id
                         const postersInTheClamp = clampMarkBook[id]
-                        for (const poster of postersInTheClamp) {
-                            pageSorted.push(poster)
-                        }
-                        if (!this.rdd) {
-                            pageSorted.push({
+                        if(clampOpened[id]){
+                            pageSorted = [...pageSorted, ...postersInTheClamp, {
                                 itemType: 'cushion',
                                 inClamp: id
-                            })
+                            }]
                         }
                     }
                 }
 
-                return pagePosters
-            },
-            rdd() {
-                return this.$store.state.rdd
-            },
+                return pageSorted
+            }
         },
         components: {
             Poster,
-            Molecule,
             Clamp
+        },
+        mounted(){
+            const clampOpened = {}
+            this.$props.PageContent.map(poster => {
+                const inClamp = poster.inClamp
+                clampOpened[inClamp] = clampOpened[inClamp] || false
+            })
+            this.$data.clampOpened = clampOpened
         },
         props: {
             PageContent: {

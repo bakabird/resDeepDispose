@@ -1,22 +1,14 @@
 <template>
   <div id="app">
-    <div v-show="voice == 10">
-      <input v-model="word" />
-      <input type="button" value="YES" @click="veritify()">
-    </div>
     <header>
       <div class='introduction'>
-        <img class="logo" @click="knock()" width="150" src="./assets/iz-one-logo.png">
+        <img class="logo" width="150" src="./assets/iz-one-logo.png">
         <div class="new">刚出炉的熟肉呈浅珊瑚色</div>
         <div class="raw">较难食用的生肉呈墨绿色</div>
         <div class="clampTip">包含了其他纸条的夹子呈米黄色</div>
       </div>
       <!-- <div>比起弹幕数量更关注弹幕的友善度</div> -->
       <div>{{announcement}}</div>
-      <div v-if="rdd">
-        <input type="text" v-model="newAnnouncement">
-        <button @click="setAnnouncement">修改公告</button>
-      </div>
       <!-- <div>个人维护，更新不及时见谅</div> -->
       <form class='filter'>
         <label class='mainItem Latest' :class="{'itemActived': filter === 'Latest'}" for="Latest">
@@ -58,9 +50,6 @@
   @Component({
     data() {
       return {
-        voice: 0,
-        word: '',
-        hasComforted: false,
         filter: 'Latest',
         announcement: store.get('announcement') || '',
         newAnnouncement: '',
@@ -74,23 +63,7 @@
         this.$record('过滤器切换(to,from)', to, from)
       }
     },
-    computed: {
-      rdd() {
-        return this.$store.state.rdd
-      }
-    },
     methods: {
-      knock() {
-        if (this.$data.voice < 10) {
-          this.$data.voice++;
-        }
-      },
-      veritify() {
-        if (this.$data.word === 'Violeta1210' || (this.$data.word === 'RDD' && Vue.isDev)) {
-          this.$store.commit('rddIsGod')
-        }
-        this.$data.voice++;
-      },
       fetchAnnouncement() {
         axios.get(Vue.rootPath + '/util/getVal?key=izoniAnnouncement')
           .then(re => {
@@ -98,18 +71,6 @@
             store.set('announcement', re.data.data)
           }).catch(err => {
             this.$data.announcement = 'ErrorCode:42'
-            Vue.error(err)
-          })
-      },
-      setAnnouncement() {
-        const that: any = this
-        axios.post(Vue.rootPath + '/util/setVal', {
-            key: 'izoniAnnouncement',
-            value: this.$data.newAnnouncement
-          })
-          .then(re => {
-            that.fetchAnnouncement()
-          }).catch(err => {
             Vue.error(err)
           })
       }

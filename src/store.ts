@@ -5,12 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    rdd: false,
+    // rdd: false,
   },
   mutations: {
-    rddIsGod(state) {
-      state.rdd = true
-    }
+    // rddIsGod(state) {
+    //   state.rdd = true
+    // }
   },
   actions: {
 

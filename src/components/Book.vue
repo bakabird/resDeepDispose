@@ -1,11 +1,8 @@
 <template>
   <div class="mine">
-    <ToolBox @flash="flashData" :criteriaString='criteriaString' :curTags="tagsClassified" />
-    <template v-for="Page in PagesFiltered">
-      <div class='dateCard' :key="Page[0].date">
-        <Page @edit='toEdit' @finishEdit='flashData' :PageContent='Page' :Sites='Sites' :Tags='tagsClassified' />
-      </div>
-    </template>
+    <div v-for="Page in PagesFiltered" class='dateCard' :key="Page[0].date">
+      <Page :PageContent='Page' :Sites='Sites' :Tags='tagsClassified' />
+    </div>
   </div>
 </template>
 
@@ -16,7 +13,6 @@
     Vue
   } from 'vue-property-decorator';
   import Page from './Page.vue'
-  import ToolBox from './ToolBox.vue';
 
   import axios from 'axios'
   import store from 'store'
@@ -90,20 +86,12 @@
   @Component({
     data() {
       return {
-        allPosters: [],
-        freshPosters: [],
+        allPosters: store.get('allPosters') || [],
+        freshPosters: store.get('freshPosters') || [],
         criteria: store.get('criteria') || {},
       }
     },
     methods: {
-      toEdit(posterNo) {
-        const that:any = this
-        const Posters = that.getCurrentPosters()
-        const newPosters = Object.assign({}, Posters[posterNo], {
-          edit: true
-        })
-        Vue.set(Posters, posterNo, newPosters)
-      },
       getCurrentPosters(){
         if(this.$props.filter === 'Latest'){
           return this.$data.freshPosters
@@ -115,12 +103,6 @@
     computed: {
       Posters(){
         return this.getCurrentPosters()
-      },
-      rdd() {
-        return this.$store.state.rdd
-      },
-      criteriaString() {
-        return JSON.stringify(this.criteria)
       },
       Tags(){
         const newTags = statisticsSort(attrStatistics(this.Posters, 'tag'))
@@ -164,7 +146,6 @@
         return isEqual(this.$data.Pages, newPages) ? this.$data.Pages : newPages;
       },
       PagesFiltered() {
-        // 预先添加日期为66-66-66的条目;
         Vue.log('密集计算打卡点')
         const pages = this.Pages
         const pagesFiltered = []
@@ -180,12 +161,10 @@
           }
         }
 
-        // if(!this.$props.insideClamp) chain = chain.filter(i => i.inClamp === -1)
         return pagesFiltered
       },
     },
     components: {
-      ToolBox,
       Page
     },
   })
@@ -196,20 +175,22 @@
     //    including: Golds Sites Tag & Page
     public setFreshPosters(posters){
       this.$data.freshPosters = this.processPosters(posters)
+      store.set('freshPosters',this.$data.freshPosters)
     }
     public setAllPosters(posters){
       this.$data.allPosters = this.processPosters(posters)
+      store.set('allPosters',this.$data.allPosters)
     }
     public processPosters(posters) {
       // the gold will be date-sequential after sort
       const posterSorted = posters.sort(sortByDateAndOther)
       // add some field into the obj for edit-useage
-      const posterHasEditMark = posterSorted.map((i, idx) => {
-        i.posterNo = idx
-        i.edit = false
-        return i
-      })
-      return posterHasEditMark
+      // const posterHasEditMark = posterSorted.map((i, idx) => {
+      //   i.posterNo = idx
+      //   i.edit = false
+      //   return i
+      // })
+      return posterSorted
     }
     // fetch date from api
     public flashData() {

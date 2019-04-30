@@ -130,15 +130,15 @@ function statisticsSort(stat) {
       Vue.log(re)
       return re
     },
-    PagesHub(){
+    PagesHub() {
       Vue.log('密集计算打卡点')
       const newPagesHub = {}
-      const pages= this.Pages
+      const pages = this.Pages
 
-      const allFitlerKeywords = Object.keys(this.$data.criteria).filter(a => a!=='Other')
+      const allFitlerKeywords = Object.keys(this.$data.criteria).filter(a => a !== 'Other')
       allFitlerKeywords.push('No')
       const pagesForAllPostres = this.paging(this.$data.allPosters)
-      for(let someFilter of allFitlerKeywords){
+      for (const someFilter of allFitlerKeywords) {
         const pagesOnThisFilter = []
         for (let page of pagesForAllPostres) {
           const date = page[0].date
@@ -180,7 +180,7 @@ export default class Book extends Vue {
 
   // factory for the useful date
   //    including: Golds Sites Tag & Page
-  public paging(posters){
+  public paging(posters) {
     const newPages: any = []
     const now = moment();
     let i = -1;

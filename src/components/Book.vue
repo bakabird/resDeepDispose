@@ -18,7 +18,7 @@ import Page from './Page.vue'
 import axios from 'axios'
 import store from 'store'
 import isEqual from 'lodash.isequal'
-import moment from 'moment'
+import moment, { version } from 'moment'
 
 function sortIndex(a, b) {
   return b.index - a.index
@@ -196,6 +196,7 @@ export default class Book extends Vue {
     })
     return newPages;
   }
+
   public setFreshPosters(posters) {
     this.$data.freshPosters = this.processPosters(posters)
     store.set('freshPosters', this.$data.freshPosters)
@@ -205,37 +206,45 @@ export default class Book extends Vue {
     store.set('allPosters', this.$data.allPosters)
   }
   public processPosters(posters) {
-    // the gold will be date-sequential after sort
     const posterSorted = posters.sort(sortByDateAndOther)
-    // add some field into the obj for edit-useage
-    // const posterHasEditMark = posterSorted.map((i, idx) => {
-    //   i.posterNo = idx
-    //   i.edit = false
-    //   return i
-    // })
     return posterSorted
   }
   // fetch date from api
   public flashData() {
     axios.get(Vue.rootPath + '/izone/all')
       .then((re) => {
-        this.setAllPosters(re.data.data)
+        this.setAllPosters(re.data.data.posters)
+        if(store.get('version') !== re.data.data.version){
+          this.freshData(false)
+        }
       })
       .catch((err) => {
         Vue.error(err)
       })
   }
-  public headFreshData() {
+  public freshData(continueFetchAllPoster = true) {
     axios.get(Vue.rootPath + '/izone/fresh')
       .then((re) => {
-        this.setFreshPosters(re.data.data)
-        setTimeout(() => {
-          this.flashData()
-        }, 4200)
+        this.setFreshPosters(re.data.data.posters)
+        store.set('version', re.data.data.version)
+        if(continueFetchAllPoster){
+          setTimeout(() => {
+            this.flashData()
+          }, 4200)
+        }
       })
       .catch((err) => {
         Vue.error(err)
       })
+  }
+  public makesureData(){
+    axios.post(Vue.rootPath + '/izone/needToFetch',{
+      version: store.get('version') || -1
+    }).then(re => {
+      if(re.data.data || !this.$data.allPosters || !this.$data.freshPosters || this.$data.allPosters.length === 0 || this.$data.freshPosters.length === 0){
+        this.freshData()
+      }
+    })
   }
   public fetchCriteria() {
     axios.get(Vue.rootPath + '/util/getVal?key=izoniCriteria')
@@ -248,7 +257,7 @@ export default class Book extends Vue {
   }
   // startFrom here
   public mounted() {
-    this.headFreshData();
+    this.makesureData()
     this.fetchCriteria()
   }
 }

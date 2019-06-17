@@ -6,6 +6,8 @@
 @import "clamp";
 
 @import "book";
+@import "search";
+
 
 
 #app {
@@ -32,11 +34,10 @@ header{
 footer{
   margin-top: 30px;
   font-size: 12px;
-  // color: #e6afb1;
 }
 
 .logo{
-  margin:25px auto 15px;
+  margin:35px auto 10px;
 }
 
 

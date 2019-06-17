@@ -48,8 +48,8 @@ const now = moment();
     }
   }
 })
-export default class Gold extends Vue {
-  @Prop() private sqlId!: number;
+export default class Poster extends Vue {
+  @Prop() private sqlId!: string;
 
   @Prop() private mainUrl!: string;
   @Prop() private date!: string;

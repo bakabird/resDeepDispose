@@ -12,7 +12,7 @@
 </template>
 <script>
     export default {
-        name: 'clamp',
+        name: 'Clamp',
         data(){
             return {
                 open: false

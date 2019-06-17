@@ -2,7 +2,7 @@
   <div id="app">
     <header>
       <div class='introduction'>
-        <img class="logo" width="150" src="./assets/iz-one-logo.png">
+        <img class="logo" width="100" src="./assets/iz-one-logo.png">
         <div class="new">刚出炉的熟肉呈浅珊瑚色</div>
         <div class="raw">较难食用的生肉呈墨绿色</div>
         <div class="clampTip">包含了其他纸条的夹子呈米黄色</div>
@@ -31,9 +31,14 @@
           <input id='Radio' name='filter' v-model="filter" type='radio' value='Radio' />电台</label>
         <label class='item Ceremony' :class="{'itemActived': filter === 'Ceremony'}" for="Ceremony">
           <input id='Ceremony' name='filter' v-model="filter" type="radio" value='Ceremony' />典礼</label>
+        <!-- for line -->
+        <label class='mainItem Search' :class="{'itemActived': filter === 'Search'}" for="Search">
+          <input id='Search' name='filter' v-model="filter" type="radio" value='Search' />进行搜索</label>
       </form>
     </header>
-    <Book :filter='filter' />
+    <Feedback/>
+    <ErrorRepoort/>
+    <IzoniBook :filter='filter' />
     <footer>- 暂由RDD个人维护 -</footer>
   </div>
 </template>
@@ -43,9 +48,12 @@
     Component,
     Vue
   } from 'vue-property-decorator';
-  import Book from './components/Book.vue';
+  import IzoniBook from './components/IzoniBook.vue';
+  import Feedback from './components/Feedback.vue'
+  import ErrorRepoort from './components/ErrorRepoort.vue'
   import store from 'store'
   import axios from 'axios'
+  
 
   @Component({
     data() {
@@ -56,7 +64,7 @@
       }
     },
     components: {
-      Book
+      IzoniBook, Feedback, ErrorRepoort
     },
     watch: {
       filter(to, from) {
@@ -82,3 +90,13 @@
   })
   export default class App extends Vue {}
 </script>
+
+<style lang="scss">
+.icon {
+  width: 2em;
+  height: 2em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+</style>

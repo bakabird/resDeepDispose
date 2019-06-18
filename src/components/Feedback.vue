@@ -64,7 +64,7 @@
     position: absolute;
     font-size: .8em;
     top: 10px;
-    border: 1px solid rgb(221, 163, 165);
+    // border-bottom: 1px solid rgb(221, 163, 165);
     border-radius: 6px;
     left: 15px;
     padding: .2em .6em .3em .6em;

@@ -3,9 +3,9 @@
     <header>
       <div class='introduction'>
         <img class="logo" width="100" src="./assets/iz-one-logo.png">
-        <div class="new">刚出炉的熟肉呈浅珊瑚色</div>
+        <!-- <div class="new">刚出炉的熟肉呈浅珊瑚色</div>
         <div class="raw">较难食用的生肉呈墨绿色</div>
-        <div class="clampTip">包含了其他纸条的夹子呈米黄色</div>
+        <div class="clampTip">包含了其他纸条的夹子呈米黄色</div> -->
       </div>
       <!-- <div>比起弹幕数量更关注弹幕的友善度</div> -->
       <div>{{announcement}}</div>

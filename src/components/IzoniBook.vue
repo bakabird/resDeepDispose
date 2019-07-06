@@ -239,15 +239,6 @@
                 return emptyPage
             }
         }
-        // ******
-        // Search 功能 -x
-        // ******
-        private dealSearchResult(pages){
-            this.SearchResult = pages
-        }
-        // ******
-        // Search 功能 +x
-        // ******
     }
 
 </script>

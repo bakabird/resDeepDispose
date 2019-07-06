@@ -1,5 +1,5 @@
 <template>
-  <div class="bar poster" :class="{ new:!!isNew, raw:!!isRaw, inClamp: inClamp, noShellPoster: noShell}">
+  <div class="bar poster" :class="{ new:!!isNew, raw:!!isRaw, invalid: invalid ,inClamp: inClamp, noShellPoster: noShell}">
     <a class="title link" @click="record(mainUrl)" :href="mainUrl" target="_blank">
       {{name}}
       <span class='titleMeta cut' v-if="!!isCut">[cut]</span>
@@ -68,6 +68,7 @@ export default class Poster extends Vue {
 
   @Prop() private isRaw!: boolean;
   @Prop() private isCut!: boolean;
+  @Prop() private invalid!: boolean;
 
 // setting
   @Prop() private noShell!: boolean;

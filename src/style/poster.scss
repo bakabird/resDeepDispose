@@ -26,6 +26,14 @@
       color: $new_meta;
     }
   }
+  &.invalid{
+    color: $invalid_color;
+    background: $invalid_bgcolor;
+    opacity: .5;
+    .meta,.link{
+      color: $invalid_color
+    }
+  }
   &.raw{
     background: $raw_bgcolor;
     .meta{

@@ -18,6 +18,6 @@ import Page from './Page.vue'
   },
 })
 export default class Book extends Vue {
-  @Prop() private Pages!: Array<Object>;
+  @Prop() private Pages!: object[];
 }
 </script>

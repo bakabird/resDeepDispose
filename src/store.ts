@@ -5,12 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    // rdd: false,
+    SearchKey: '',
   },
   mutations: {
-    // rddIsGod(state) {
-    //   state.rdd = true
-    // }
+    updateSearchKey(state, newSearchKey) {
+      state.SearchKey = newSearchKey
+    }
   },
   actions: {
 

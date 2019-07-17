@@ -27,13 +27,13 @@ export default Vue.extend({
             })
         },
         hide() {
-            if(!this.$props.noExit){
+            if (!this.$props.noExit) {
                 this.$data.popoutttt = false
             }
         }
     },
-    watch:{
-        hideSignal(){
+    watch: {
+        hideSignal() {
             this.$data.popoutttt = false
         }
     },

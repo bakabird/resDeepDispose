@@ -30,97 +30,97 @@
 </template>
 
 <script lang="ts">
-    import {
-        Component,
-        Prop,
-        Vue,
-        Emit
-    } from 'vue-property-decorator';
-    import axios from 'axios'
-    import Book from "./Book.vue"
-    import IzoniFactory from './IzoniFactory.js'
+import {
+    Component,
+    Prop,
+    Vue,
+    Emit
+} from 'vue-property-decorator';
+import axios from 'axios'
+import Book from './Book.vue'
+import IzoniFactory from './IzoniFactory.js'
 
-    @Component({
-        data() {
-            return {
-                show: true,
-                searchVal: '',
-                hits: [],
-                pages: 0,
-                curPage: 0,
-                searchResultPosters: []
+@Component({
+    data() {
+        return {
+            show: true,
+            searchVal: '',
+            hits: [],
+            pages: 0,
+            curPage: 0,
+            searchResultPosters: []
+        }
+    },
+    components: {
+        Book
+    },
+})
+export default class SearchBoard extends Vue {
+    private touchDown(e) {
+        const target = e.target
+        const clientHeight = target.clientHeight;
+        const scrollTop = target.scrollTop;
+        const scrollHeight = target.scrollHeight;
+        if (scrollTop + clientHeight >= scrollHeight * 0.8) {
+            if (this.$data.pages > this.$data.curPage) {
+                this.$data.curPage += 1;
+                this.toSearch()
+            } else {
+                // console.log('差不多到底了')
             }
-        },
-        components: {
-            Book
-        },
-    })
-    export default class SearchBoard extends Vue {
-        private touchDown(e) {
-            const target = e.target
-            var clientHeight = target.clientHeight;
-            var scrollTop = target.scrollTop;
-            var scrollHeight = target.scrollHeight;
-            if (scrollTop + clientHeight >= scrollHeight * 0.8) {
-                if (this.$data.pages > this.$data.curPage) {
-                    this.$data.curPage += 1;
-                    this.toSearch()
-                } else {
-                    // console.log('差不多到底了')
-                }
-            }
-        }
-        private toSearch() {
-            axios.post('http://localhost:9200/izoni/_search', {
-                query: {
-                    match: {
-                        name: this.$data.searchVal,
-                    },
-                },
-                size: (this.$data.curPage + 1) * 10,
-                sort: {
-                    date: {
-                        order: "desc"
-                    }
-                }
-            }).then(re => {
-                this.$data.pages = Math.ceil(re.data.hits.total.value / 10)
-                this.$data.hits = re.data.hits.hits
-                // 组织出Posters
-                const Posters = []
-                this.$data.hits.map(hit => {
-                    const dateStr = `${hit._source.date}`
-                    hit._source.dateStr =
-                        `${dateStr[0]}${dateStr[1]}-${dateStr[2]}${dateStr[3]}-${dateStr[4]}${dateStr[5]}`
-
-                    // 填补Poster
-                    const poster = Object.assign({}, hit._source)
-                    poster.date = poster.dateStr
-                    delete poster.dateStr
-                    poster.id = parseInt(hit._id)
-
-                    Posters.push(poster)
-                })
-                // 使用Factory将Poster转换成页数数据
-                const Factory = new IzoniFactory(Posters)
-                this.$data.searchResultPosters = Factory.pages
-            }).catch(err => {
-                console.error(err)
-            })
-        }
-        private flashPage() {
-            this.$data.curPage = 0
-            this.toSearch()
-        }
-        private lastPage() {
-            this.$data.curPage -= 1
-            this.toSearch()
-        }
-        private nextPage() {
-            this.$data.curPage += 1
-            this.toSearch()
         }
     }
+    private toSearch() {
+        axios.post('http://localhost:9200/izoni/_search', {
+            query: {
+                match: {
+                    name: this.$data.searchVal,
+                },
+            },
+            size: (this.$data.curPage + 1) * 10,
+            sort: {
+                date: {
+                    order: 'desc'
+                }
+            }
+        }).then(re => {
+            this.$data.pages = Math.ceil(re.data.hits.total.value / 10)
+            this.$data.hits = re.data.hits.hits
+            // 组织出Posters
+            const Posters = []
+            this.$data.hits.map(hit => {
+                const dateStr = `${hit._source.date}`
+                hit._source.dateStr =
+                    `${dateStr[0]}${dateStr[1]}-${dateStr[2]}${dateStr[3]}-${dateStr[4]}${dateStr[5]}`
+
+                // 填补Poster
+                const poster = Object.assign({}, hit._source)
+                poster.date = poster.dateStr
+                delete poster.dateStr
+                poster.id = parseInt(hit._id, 10)
+
+                Posters.push(poster)
+            })
+            // 使用Factory将Poster转换成页数数据
+            const Factory = new IzoniFactory(Posters)
+            this.$data.searchResultPosters = Factory.pages
+        }).catch(err => {
+            Vue.error(err)
+        })
+    }
+    private flashPage() {
+        this.$data.curPage = 0
+        this.toSearch()
+    }
+    private lastPage() {
+        this.$data.curPage -= 1
+        this.toSearch()
+    }
+    private nextPage() {
+        this.$data.curPage += 1
+        this.toSearch()
+    }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

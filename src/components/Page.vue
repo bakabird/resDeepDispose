@@ -91,7 +91,7 @@
                     if (poster.itemType === 'clamp') {
                         const id = poster.id
                         const postersInTheClamp = clampMarkBook[id]
-                        if(clampOpened[id]){
+                        if(clampOpened[id]) {
                             pageSorted = [...pageSorted, ...postersInTheClamp, {
                                 itemType: 'cushion',
                                 inClamp: id
@@ -107,7 +107,7 @@
             Poster,
             Clamp
         },
-        mounted(){
+        mounted() {
             const clampOpened = {}
             this.$props.PageContent.map(poster => {
                 const inClamp = poster.inClamp

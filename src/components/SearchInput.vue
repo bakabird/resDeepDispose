@@ -5,27 +5,28 @@
                 <use xlink:href="#icon-search"></use>
             </svg>
         </div>
-        <input class='searchInput' type='search' v-model='searchVal' @input="$emit('change',searchVal)">
+        <input class='searchInput' type='search' v-bind:value='searchVal' @input="onInputChange">
     </div>
 </template>
 
 <script lang="ts">
-    import {
-        Component,
-        Prop,
-        Vue,
-        Watch
-    } from 'vue-property-decorator';
+import {
+    Component,
+    Prop,
+    Vue,
+    Watch
+} from 'vue-property-decorator';
 
-    @Component({
-        model: {
-            prop: 'value',
-            event: 'change'
-        }
-    })
-    export default class SearchInput extends Vue {
-        private searchVal: string = ''
+@Component({})
+export default class SearchInput extends Vue {
+    public searchVal: string = ''
 
-        @Prop() private value!: string;
+    private onInputChange(e) {
+        this.updateSearchVal(e.target.value)
     }
+    private updateSearchVal(newSearchVal: string) {
+        this.searchVal = newSearchVal
+        this.$store.commit('updateSearchKey', newSearchVal)
+    }
+}
 </script>

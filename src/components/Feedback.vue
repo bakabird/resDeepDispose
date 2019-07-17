@@ -18,43 +18,43 @@
     </PopOut>
 </template>
 <script lang="ts">
-    import {
-        Component,
-        Vue
-    } from 'vue-property-decorator';
-    import PopOut from './PopOut.vue'
-    import axios from 'axios'
-    
-    @Component({
-        components:{ PopOut }
-    })
+import {
+    Component,
+    Vue
+} from 'vue-property-decorator';
+import PopOut from './PopOut.vue'
+import axios from 'axios'
 
-    export default class Feedback extends Vue {
-        private value: string = ''
-        private step: number = 0
-        private signal: number = 0
-        
-        private uploadFeedback() {
-            if(this.value !== ''){
-                this.step = 1
-                axios.post(Vue.rootPath + '/util/setVal/',{
-                    key: `IZONIFEEDBACK_${Date.now()}`,
-                    string: this.value
-                }).then((re)=>{
-                    this.step = re.data.errno === 0 ? 2 : 3
-                    setTimeout(()=>{
-                        this.signal = this.signal + 1
-                    },1200)
-                }).catch(err => {
-                    console.error(err)
-                    this.step = 3
-                    setTimeout(()=>{
-                        this.signal = this.signal + 1
-                    },1200)
-                })
-            }
+@Component({
+    components: { PopOut }
+})
+
+export default class Feedback extends Vue {
+    private value: string = ''
+    private step: number = 0
+    private signal: number = 0
+
+    private uploadFeedback() {
+        if (this.value !== '') {
+            this.step = 1
+            axios.post(Vue.rootPath + '/util/setVal/', {
+                key: `IZONIFEEDBACK_${Date.now()}`,
+                string: this.value
+            }).then((re) => {
+                this.step = re.data.errno === 0 ? 2 : 3
+                setTimeout(() => {
+                    this.signal = this.signal + 1
+                }, 1200)
+            }).catch(err => {
+                Vue.error(err)
+                this.step = 3
+                setTimeout(() => {
+                    this.signal = this.signal + 1
+                }, 1200)
+            })
         }
     }
+}
 </script>
 <style lang="scss" scoped>
 .feedbackBtn{

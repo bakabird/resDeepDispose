@@ -87,33 +87,27 @@ export default class Poster extends Vue {
   display: inline-block;
   background-repeat: no-repeat;
   position: relative;
+  width: 12px;
+  height: 12px;
 }
 .siteIcon_B站{
   background-image: url('../assets/bilibili.png');
-  top: 3px;
-  left: 3px;
-  width: 16px;
-  height: 16px;
+  top: 0.4px;
+  left: 1px;
 }
 .siteIcon_微博{
   background-image: url('../assets/weibo.png');
   top: 2px;
   left: 1px;
-  width: 12px;
-  height: 12px;
 }
 .siteIcon_Vlive{
   background-image: url('../assets/vlive.png');
   top: 2px;
   left: 1px;
-  width: 12px;
-  height: 12px;
 }
 .siteIcon_Youtube{
   background-image: url('../assets/youtube.png');
   top: 4px;
   left: 1px;
-  width: 12px;
-  height: 12px;
 }
 </style>

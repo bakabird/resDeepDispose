@@ -8,7 +8,11 @@
     </a>
     <div v-if="!noShell" class="meta">
       <div class="tag">{{tag}}</div>
-      <div class="from"><span class='site'>【{{site}}】</span>{{up}}</div>
+      <div class="from">
+        <span class='siteIcon' :class="{ [`siteIcon_${site}`]: true }" v-if="supportIconSites.includes(site)"></span>
+        <span class='site' v-else>【{{site}}】</span>
+        {{up}}
+      </div>
       <div class="members">{{memberStr}}</div>
     </div>
   </div>
@@ -73,5 +77,43 @@ export default class Poster extends Vue {
 // setting
   @Prop() private noShell!: boolean;
   @Prop() private inClamp!: boolean;
+
+  private readonly supportIconSites: string[] = ['B站','微博','Vlive','Youtube']
 }
 </script>
+<style lang="scss" scoped>
+.siteIcon{
+  background-size: contain;
+  display: inline-block;
+  background-repeat: no-repeat;
+  position: relative;
+}
+.siteIcon_B站{
+  background-image: url('../assets/bilibili.png');
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+}
+.siteIcon_微博{
+  background-image: url('../assets/weibo.png');
+  top: 2px;
+  left: 1px;
+  width: 12px;
+  height: 12px;
+}
+.siteIcon_Vlive{
+  background-image: url('../assets/vlive.png');
+  top: 2px;
+  left: 1px;
+  width: 12px;
+  height: 12px;
+}
+.siteIcon_Youtube{
+  background-image: url('../assets/youtube.png');
+  top: 4px;
+  left: 1px;
+  width: 12px;
+  height: 12px;
+}
+</style>

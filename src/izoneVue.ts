@@ -1,4 +1,6 @@
 const izoneVue: any = {};
+const axios = require('axios')
+
 izoneVue.install = (Vue: any, options: any) => {
   // 1. 添加全局方法或属性
   Vue.isDev = process.env.NODE_ENV === 'development'
@@ -7,6 +9,13 @@ izoneVue.install = (Vue: any, options: any) => {
   // Vue.myGlobalMethod = function () {
   //   // 逻辑...
   // }
+  Vue.getNetVal = (key: string)=>{
+    return axios.get(`${Vue.rootPath}/util/getVal?key=${key}`)
+  }
+  Vue.setNetVal = ()=>{
+
+  }
+
   Vue.log = (firstArg, ...restArg) => {
     if (Vue.isDev) {
       // tslint:disable-next-line
@@ -53,8 +62,10 @@ izoneVue.install = (Vue: any, options: any) => {
 
   // // 4. 添加实例方法
   Vue.prototype.$record = (a, b, c, d) => {
-    const _hmt: any = (window as any)._hmt;
-    _hmt.push(['_trackEvent', a, b, c, d]);
+    if(!Vue.isDev){
+      const _hmt: any = (window as any)._hmt;
+      _hmt.push(['_trackEvent', a, b, c, d]);
+    }
   }
 }
 export default izoneVue;

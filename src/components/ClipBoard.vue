@@ -27,11 +27,7 @@ export default class ClipBoard extends Vue {
     }
     public async fetchClipBoard() {
         try {
-            const res = await axios.get(Vue.rootPath + '/util/getVal', {
-                params: {
-                    key: 'IZONEClipBoard'
-                }
-            })
+            const res = await Vue.getNetVal(`IZONEClipBoard`)
 
             if (res.data && res.data.data !== '') {
                 this.clipBoardString = res.data.data

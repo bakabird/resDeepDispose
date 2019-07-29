@@ -73,14 +73,14 @@
     },
     methods: {
       fetchAnnouncement() {
-        axios.get(Vue.rootPath + '/util/getVal?key=izoniAnnouncement')
-          .then(re => {
-            this.$data.announcement = re.data.data
-            store.set('announcement', re.data.data)
-          }).catch(err => {
-            this.$data.announcement = 'ErrorCode:42'
+        Vue.getNetVal('izoniAnnouncement')
+        .then(re => {
+          this.$data.announcement = re.data.data
+          store.set('announcement', re.data.data)
+        }).catch(err => {
+          this.$data.announcement = 'ErrorCode:42'
             Vue.error(err)
-          })
+        })
       }
     },
     mounted() {

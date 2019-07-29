@@ -103,7 +103,7 @@ export default class IzoniBook extends Vue {
     }
 
     private fetchCriteria() {
-        axios.get(Vue.rootPath + '/util/getVal?key=izoniCriteria')
+        Vue.getNetVal(`izoniCriteria`)
             .then(re => {
                 const criteria = JSON.parse(re.data.data)
                 this.$data.criteria = criteria

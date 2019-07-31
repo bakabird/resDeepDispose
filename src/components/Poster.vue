@@ -9,7 +9,7 @@
     <div v-if="!noShell" class="meta">
       <div class="tag">{{tag}}</div>
       <div class="from">
-        <span class='siteIcon' :class="{ [`siteIcon_${site}`]: true }" v-if="supportIconSites.includes(site)"></span>
+        <span class='siteIcon' :class="{ [`siteIcon_${site}${!!isRaw ? 'Raw' : ''}`]: true }" v-if="supportIconSites.includes(site)"></span>
         <span class='site' v-else>【{{site}}】</span>
         {{up}}
       </div>
@@ -78,7 +78,8 @@ export default class Poster extends Vue {
   @Prop() private noShell!: boolean;
   @Prop() private inClamp!: boolean;
 
-  private readonly supportIconSites: string[] = ['B站','微博','Vlive','Youtube']
+  // private readonly supportIconSites: string[] = ['B站','微博','Vlive','Youtube']
+  private readonly supportIconSites: string[] = ['B站']
 }
 </script>
 <style lang="scss" scoped>
@@ -91,7 +92,12 @@ export default class Poster extends Vue {
   height: 12px;
 }
 .siteIcon_B站{
-  background-image: url('../assets/bilibili.png');
+  background-image: url('../assets/bilibiliNml.png');
+  top: 0.4px;
+  left: 1px;
+}
+.siteIcon_B站Raw{
+  background-image: url('../assets/bilibiliRaw.png');
   top: 0.4px;
   left: 1px;
 }
@@ -101,7 +107,7 @@ export default class Poster extends Vue {
   left: 1px;
 }
 .siteIcon_Vlive{
-  background-image: url('../assets/vlive.png');
+  background-image: url('../assets/vliveNml.png');
   top: 2px;
   left: 1px;
 }

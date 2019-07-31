@@ -2,7 +2,8 @@
   <div id="app">
     <header>
       <div class='introduction'>
-        <img class="logo" width="100" src="./assets/iz-one-logo.png">
+        <div class='birthdayPic' v-if="today === '0801'"></div>
+        <img class="logo" width="100" v-else src="./assets/iz-one-logo.png">
         <!-- <div class="new">刚出炉的熟肉呈浅珊瑚色</div>
         <div class="raw">较难食用的生肉呈墨绿色</div>
         <div class="clampTip">包含了其他纸条的夹子呈米黄色</div> -->
@@ -53,6 +54,7 @@
   import ErrorRepoort from './components/ErrorRepoort.vue'
   import store from 'store'
   import axios from 'axios'
+  import moment from 'moment'
   
 
   @Component({
@@ -61,6 +63,7 @@
         filter: 'Fresh',
         announcement: store.get('announcement') || '',
         newAnnouncement: '',
+        today: moment().format('MMDD')
       }
     },
     components: {
@@ -98,5 +101,16 @@
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
+}
+.birthdayPic{
+  background-image: url('./assets/chasewonDay.png');
+  width: 80px;
+  height: 80px;
+  background-size: contain;
+  border: 5px solid;
+  margin: 0 auto;
+  margin-top: 17px;
+  margin-bottom: 10px;
+  border-radius: 999px;
 }
 </style>

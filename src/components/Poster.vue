@@ -9,7 +9,7 @@
     <div v-if="!noShell" class="meta">
       <div class="tag">{{tag}}</div>
       <div class="from">
-        <span class='siteIcon' :class="{ [`siteIcon_${site}${!!isRaw ? 'Raw' : ''}`]: true }" v-if="supportIconSites.includes(site)"></span>
+        <span class='siteIcon' :class="{ [`siteIcon_${site}`]: true, [`siteIcon_${site}Raw`]: !!isRaw, [`siteIcon_${site}Invalid`]: invalid }" v-if="supportIconSites.includes(site)"></span>
         <span class='site' v-else>【{{site}}】</span>
         {{up}}
       </div>
@@ -78,8 +78,7 @@ export default class Poster extends Vue {
   @Prop() private noShell!: boolean;
   @Prop() private inClamp!: boolean;
 
-  // private readonly supportIconSites: string[] = ['B站','微博','Vlive','Youtube']
-  private readonly supportIconSites: string[] = ['B站']
+  private readonly supportIconSites: string[] = ['B站','微博','Vlive','Youtube']
 }
 </script>
 <style lang="scss" scoped>
@@ -93,27 +92,49 @@ export default class Poster extends Vue {
 }
 .siteIcon_B站{
   background-image: url('../assets/bilibiliNml.png');
-  top: 0.4px;
+  top: 2px;
   left: 1px;
 }
 .siteIcon_B站Raw{
   background-image: url('../assets/bilibiliRaw.png');
-  top: 0.4px;
-  left: 1px;
 }
+.siteIcon_B站Invalid{
+  background-image: url('../assets/bilibiliInvalid.png');
+}
+
 .siteIcon_微博{
-  background-image: url('../assets/weibo.png');
+  background-image: url('../assets/weiboNml.png');
   top: 2px;
   left: 1px;
 }
+.siteIcon_微博Raw{
+  background-image: url('../assets/weiboRaw.png');
+}
+.siteIcon_微博Invalid{
+  background-image: url('../assets/weiboInvalid.png');
+}
+
 .siteIcon_Vlive{
   background-image: url('../assets/vliveNml.png');
   top: 2px;
   left: 1px;
 }
+.siteIcon_VliveRaw{
+  background-image: url('../assets/vliveRaw.png');
+}
+.siteIcon_VliveInvalid{
+  background-image: url('../assets/vliveInvalid.png');
+}
+
 .siteIcon_Youtube{
-  background-image: url('../assets/youtube.png');
+  background-image: url('../assets/youtubeNml.png');
   top: 4px;
   left: 1px;
+}
+.siteIcon_YoutubeRaw{
+  background-image: url('../assets/youtubeRaw.png');
+}
+.siteIcon_YoutubeInvalid{
+  background-image: url('../assets/youtubeInvalid.png');
 }
 </style>

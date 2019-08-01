@@ -109,7 +109,7 @@
   background-size: contain;
   border: 5px solid;
   margin: 0 auto;
-  margin-top: 17px;
+  margin-top: 40px;
   margin-bottom: 10px;
   border-radius: 999px;
 }

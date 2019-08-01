@@ -1,5 +1,5 @@
 const izoneVue: any = {};
-const axios = require('axios')
+import axios from 'axios'
 
 izoneVue.install = (Vue: any, options: any) => {
   // 1. 添加全局方法或属性
@@ -9,11 +9,8 @@ izoneVue.install = (Vue: any, options: any) => {
   // Vue.myGlobalMethod = function () {
   //   // 逻辑...
   // }
-  Vue.getNetVal = (key: string)=>{
+  Vue.getNetVal = (key: string) => {
     return axios.get(`${Vue.rootPath}/util/getVal?key=${key}`)
-  }
-  Vue.setNetVal = ()=>{
-
   }
 
   Vue.log = (firstArg, ...restArg) => {
@@ -62,7 +59,7 @@ izoneVue.install = (Vue: any, options: any) => {
 
   // // 4. 添加实例方法
   Vue.prototype.$record = (a, b, c, d) => {
-    if(!Vue.isDev){
+    if (!Vue.isDev) {
       const _hmt: any = (window as any)._hmt;
       _hmt.push(['_trackEvent', a, b, c, d]);
     }

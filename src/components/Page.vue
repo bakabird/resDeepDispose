@@ -14,7 +14,7 @@
             <div :key="i.id + '_goldCushion_' + idx" v-if="i.itemType === 'cushion' && clampOpened[i.inClamp]"
                 @click="clampOpened[i.inClamp] = false" class='bar cushion'>合上夹子</div>
             <Clamp v-if="i.itemType === 'clamp'" @triggle="clampOpened[i.id] = !clampOpened[i.id]"
-                :hasOpen="clampOpened[i.id]"    :noShell="i.date === '66-66-66'" :key="i.id + '_clamp_' + idx"
+                :hasOpen="clampOpened[i.id]" :noShell="i.date === '66-66-66'" :key="i.id + '_clamp_' + idx"
                 :sqlId="i.id" :mainUrl='i.mainUrl' :name="i.name" :tag="i.tag" :ep="i.ep" :part="i.part"
                 :index="i.index" :bakedTime="i.bakedTime" :members="i.members" />
         </template>
@@ -43,7 +43,7 @@
                 const newClampMarkBook = {}
                 posters.map(poster => {
                     const inClamp = poster.inClamp
-                    if (inClamp != -1) {
+                    if (inClamp !== -1) {
                         newClampMarkBook[inClamp] = newClampMarkBook[inClamp] || []
                         newClampMarkBook[inClamp].push(poster)
                     }
@@ -81,7 +81,7 @@
                 let pageSorted = []
                 const pagePosters = this.PageContent
                 const pagePostersWithoutPostersInClamp = pagePosters.filter((poster) => {
-                    return poster.inClamp === "";
+                    return poster.inClamp === '';
                 })
                 const clampMarkBook = this.clampMarkBook
                 const clampOpened = this.clampOpened
@@ -91,7 +91,7 @@
                     if (poster.itemType === 'clamp') {
                         const id = poster.id
                         const postersInTheClamp = clampMarkBook[id]
-                        if(clampOpened[id]) {
+                        if (clampOpened[id]) {
                             pageSorted = [...pageSorted, ...postersInTheClamp, {
                                 itemType: 'cushion',
                                 inClamp: id

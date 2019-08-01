@@ -13,27 +13,27 @@
 <script>
     export default {
         name: 'Clamp',
-        data(){
+        data() {
             return {
                 open: false
             }
         },
-        methods:{
-            triggle(){
-                if(this.$props.hasOpen){
+        methods: {
+            triggle() {
+                if (this.$props.hasOpen) {
                     this.$record('关闭夹子', this.$props.name, "" + this.$props.ep + this.$props.part)
-                }else{
+                } else {
                     this.$record('打开夹子', this.$props.name, "" + this.$props.ep + this.$props.part)
                 }
                 this.$emit('triggle')
             }
         },
         props: {
-            mainUrl:{
+            mainUrl: {
                 type: String,
                 required: true
             },
-            name:{
+            name: {
                 type: String,
                 required: true
             },

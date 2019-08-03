@@ -1,6 +1,5 @@
 // font-basic
-
-@mixin fb ($factor){
+@mixin fs ($factor){
     font-size: .15rem * $factor;
     @media screen and (max-width: 960px){
         font-size: .18rem * $factor;
@@ -13,16 +12,42 @@
     }
 }
 
+@mixin eqFs ($key,$factor){
+    #{$key}: .15rem * $factor;
+    @media screen and (max-width: 960px){
+        #{$key}: .18rem * $factor;
+    }
+    @media screen and (max-width: 620px){
+        #{$key}: .25rem * $factor;
+    }
+    @media screen and (max-width: 375px){
+        #{$key}: .35rem * $factor;
+    }
+}
+
+// BUSINESS CODE
 @mixin posterWidth {
     // 800 -960 (4col) 200px - 240px
-    width: 2.3rem;
+    width: 2.23rem;
     // 600 -800 (3col) 200px - 266.666666667px
     @media screen and (max-width: 800px){
-      width: 3rem;
+      width: 2.9rem;
     }
     // 0 -600 (2col) 0px - 300px
     @media screen and (max-width: 600px){
-      width: 4.3rem;
+      width: 4.5rem;
+    }
+}
+@mixin datePosterWidth {
+    // 800 -960 (4col) 200px - 240px
+    width: .18rem;
+    // 600 -800 (3col) 200px - 266.666666667px
+    @media screen and (max-width: 800px){
+      width: .3375rem;
+    }
+    // 0 -600 (2col) 0px - 300px
+    @media screen and (max-width: 600px){
+      width: .54rem;
     }
 }
 
@@ -34,12 +59,12 @@
     @media screen and (max-width: 800px){
       height: 30px;
       line-height: 30px;
-      @include fb(1.2);
+      @include fs(1.2);
     }
     // 0 -500
     @media screen and (max-width: 500px){
       height: 32px;
       line-height: 32px;
-      @include fb(1.2);
+      @include fs(1.2);
     }
 }

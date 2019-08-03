@@ -8,10 +8,20 @@
   opacity: .6;
 }
 
+
 .meta {
   display: flex;
   flex-wrap: wrap;
   font-size: 12px;
+  .from{
+    @include fs(.9);
+    padding: 0 3px;
+    border-radius: 3px;
+    text-align: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
 }
 
 // 时间相关
@@ -26,72 +36,89 @@
 
 .poster {
   position: relative;
-  border-bottom: 2px solid #fff;
+  border-bottom: 1px solid $normal_borderColor;
+  margin-bottom: 40px;
+  border-radius: 5px;
 
   @include posterWidth;
 
+  // meta
   .meta {
     margin-top: 10px;
     color: $normal_meta;
-
-    .from {
-      flex: 1;
-      @include fb(.8);
-    }
-
-    .members {
-      width: 100%
-    }
+  }
+  .from {
+    flex: 1;
+    @include fs(.8);
+  }
+  .members {
+    width: 100%
   }
 
   // 链接
   .link {
     color: $normal_color;
     display: block;
-    @include fb(1.2);
-    text-align: left;
-    // line-height: $fb * 1.5;
-    font-weight: bold;
     text-decoration: none;
-
-    .coverBox {
-      position: relative;
-
-      .cover {
-        width: 100%;
-        margin-bottom: 5px;
-        border-radius: 3%;
-        display: block;
-      }
-
-      .mask {
-        position: absolute;
-        bottom: 0;
-        height: 34px;
-        width: 100%;
-        background: rgba(0, 0, 0, .5);
-        background: linear-gradient(transparent, transparent, rgba(0, 0, 0, .5));
-
-        .tag {
-          bottom: 3px;
-          background: #0000007a;
-          left: 3px;
-          @include fb(.9);
-          padding: 0 3px;
-          border-radius: 3px;
-          position: absolute;
-        }
-      }
-    }
 
     &:hover {
       cursor: pointer;
     }
   }
 
+  .coverBox {
+    position: relative;
+  }
+  .cover {
+    width: 100%;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    display: block;
+  }
+
+  .mask {
+    position: absolute;
+    bottom: 0;
+    height: 34px;
+    width: 100%;
+    background: rgba(0, 0, 0, .5);
+    background: linear-gradient(transparent, transparent, rgba(0, 0, 0, .5));
+  }
+
+  .tag {
+    bottom: 100%;
+    // background: #ffffff96;
+    left: 5%;
+    font-size: 12px;
+    padding: 0 3px;
+    background: #fdebea;
+    border-bottom: none;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    position: absolute;
+    max-width: 4em;
+  }
+
+
+  .title{
+    text-align: left;
+    font-weight: bold;
+    overflow: hidden;
+    padding: 0 3px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    @include fs(1.2);
+    @include eqFs('line-height',1.3);
+    @include eqFs('height',1.3 * 2);
+  }
+
   &.noShellPoster {
     .title {
-      @include fb(1);
+      @include fs(1);
+      @include eqFs('line-height',1.1);
+      @include eqFs('max-height',1.1 * 2);
     }
   }
 
@@ -100,8 +127,7 @@
     color: $new_color;
     background: $new_bgcolor;
 
-    .meta,
-    .tag {
+    .meta,.tag {
       color: $new_meta;
     }
   }
@@ -112,9 +138,14 @@
     background: $invalid_bgcolor;
     opacity: .5;
 
-    .meta,
-    .link,
+    .meta{
+      color: $invalid_color
+    }
     .tag {
+      color: $invalid_color;
+      background: $invalid_bgcolor;
+    }
+    .link{
       color: $invalid_color
     }
   }
@@ -122,16 +153,19 @@
   // 尚未翻译的字条
   &.raw {
     background: $raw_bgcolor;
+    border-bottom: 1px solid $raw_borderColor;
 
-    .meta,
-    .tag {
+    .meta{
       color: $raw_meta;
     }
 
-    .link {
+    .tag {
       color: $raw_color;
+      background: $raw_bgcolor;
+    }
+
+    .title{
+      color: $raw_color
     }
   }
-
-
 }

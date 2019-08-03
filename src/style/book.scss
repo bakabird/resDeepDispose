@@ -1,6 +1,22 @@
+@import "number";
+
 .izonibook{
   max-width: 960px;
   margin: 0 auto;
+  .book{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    .datePoster{
+      border-radius: 5px;
+      color: #a58a78;
+      background: #f5eee887;
+      @include fs(1);
+      @include datePosterWidth;
+      margin-bottom: 10px;
+      line-height: 100%;
+    }
+  }
 }
 
 // .mine {

@@ -35,13 +35,13 @@ html{
 }
 
 header{
-  @include fb(1);
+  @include fs(1);
   margin-top: 12px;
 }
 
 footer{
   margin-top: 30px;
-  @include fb(1);
+  @include fs(1);
 }
 
 .logo{

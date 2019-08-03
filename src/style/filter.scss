@@ -14,7 +14,7 @@
   margin: 5px auto;
   margin-bottom: 25px;
   label{
-    @include fb(1);
+    @include fs(1);
     margin: 2px 0;
 
     @include filterLabel;

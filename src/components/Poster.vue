@@ -1,30 +1,30 @@
 <template>
-  <div class="bar poster"
-    :class="{ new:!!isNew, raw:!!isRaw, invalid: invalid ,inClamp: inClamp, noShellPoster: noShell}">
-    <a class="title link" @click="record(mainUrl)" :href="mainUrl" target="_blank">
+  <div class="poster" :class="{ new:!!isNew, raw:!!isRaw, invalid: invalid ,inClamp: inClamp, noShellPoster: noShell}">
+    <a class="link" @click="record(mainUrl)" :href="mainUrl" target="_blank">
       <div class="coverBox">
         <img class='cover' src="../assets/bilibili_cover_sample.png" alt="cover sample of bilibili">
-        <div class="mask">
-          <div class="tag">{{tag}}</div>
-        </div>
+        <!-- <div class="mask"></div> -->
+        <div class="tag">{{tag}}</div>
       </div>
-      {{name}}
-      <span class='titleMeta cut' v-if="!!isCut">[cut]</span>
-      <span class='titleMeta part' v-if="!!part">Part {{part}}</span>
-      <span class='titleMeta ep' v-else-if="!!ep">EP {{ep}}</span>
+      <div class="title">
+        {{name}}
+        <span class='titleMeta cut' v-if="!!isCut">[cut]</span>
+        <span class='titleMeta part' v-if="!!part">Part {{part}}</span>
+        <span class='titleMeta ep' v-else-if="!!ep">EP {{ep}}</span>
+      </div>
     </a>
     <div v-if="!noShell" class="meta">
+      <div class="members">
+        <template v-for="member in arrMembers">
+          <div class="memberEmoji" :class="'memberEmoji_' + member" :key="`${sqlId}_${member}`"></div>
+        </template>
+      </div>
       <div class="from">
         <span class='siteIcon'
           :class="{ [`siteIcon_${site}`]: true, [`siteIcon_${site}Raw`]: !!isRaw, [`siteIcon_${site}Invalid`]: invalid }"
           v-if="supportIconSites.includes(site)"></span>
         <span class='site' v-else>【{{site}}】</span>
         {{up}}
-      </div>
-      <div class="members">
-        <template v-for="member in arrMembers">
-          <div class="memberEmoji" :class="'memberEmoji_' + member" :key="`${sqlId}_${member}`"></div>
-        </template>
       </div>
     </div>
   </div>

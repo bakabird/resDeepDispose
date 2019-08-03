@@ -2,114 +2,136 @@
 @import "number";
 @import "members";
 
-.bar {
-    position: relative;
-    border-bottom: 2px solid #fff;
-
-    @include barWidth;
-
-    .cover{
-      width: 100%;
-      margin-bottom: 5px;
-      border-radius: 3%;
-      display: block;
-    }
-    .title {
-      display: block;
-      @include fb(1.2);
-      text-align: left;
-      // line-height: $fb * 1.5;
-      font-weight: bold;
-      text-decoration: none; 
-    }
-    &.noShellPoster{
-      .title{
-        @include fb(1);
-        // line-height: $fb * 1.2;
-      }
-    }
-
-  .meta {
-    .tag{
-        min-width: 4em;
-        flex: .5;
-        @media screen and (max-width:300px){
-          flex: 1;
-        }
-        padding:0 3px;
-        @include fb(.8);
-    }
-    .from{
-        // min-width: 10em;
-        flex: 1;
-        @include fb(.8);
-    }
-    .members {
-        width: 100%
-    }
-  }
-}
-
-
-
-
 // titleinfo
 .titleMeta {
-    font-size: 12px;
-    opacity: .6;
+  font-size: 12px;
+  opacity: .6;
 }
 
-.meta{
-    display: flex;
-    flex-wrap: wrap;
-    font-size: 12px;
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
 }
 
 // 时间相关
 
 .tomorrow {
-    opacity: .5;
+  opacity: .5;
 }
 
 .theDayAfterTomorrow {
-    opacity: .25;
+  opacity: .25;
 }
 
 .poster {
+  position: relative;
+  border-bottom: 2px solid #fff;
+
+  @include posterWidth;
+
+  .meta {
+    margin-top: 10px;
+    color: $normal_meta;
+
+    .from {
+      flex: 1;
+      @include fb(.8);
+    }
+
+    .members {
+      width: 100%
+    }
+  }
+
+  // 链接
   .link {
     color: $normal_color;
+    display: block;
+    @include fb(1.2);
+    text-align: left;
+    // line-height: $fb * 1.5;
+    font-weight: bold;
+    text-decoration: none;
+
+    .coverBox {
+      position: relative;
+
+      .cover {
+        width: 100%;
+        margin-bottom: 5px;
+        border-radius: 3%;
+        display: block;
+      }
+
+      .mask {
+        position: absolute;
+        bottom: 0;
+        height: 34px;
+        width: 100%;
+        background: rgba(0, 0, 0, .5);
+        background: linear-gradient(transparent, transparent, rgba(0, 0, 0, .5));
+
+        .tag {
+          bottom: 3px;
+          background: #0000007a;
+          left: 3px;
+          @include fb(.9);
+          padding: 0 3px;
+          border-radius: 3px;
+          position: absolute;
+        }
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
-  .link:hover {
-    cursor: pointer;
+  &.noShellPoster {
+    .title {
+      @include fb(1);
+    }
   }
 
-  .meta{
-    color: $normal_meta;
-  }
-
-  &.new{
+  // 新资源字条
+  &.new {
     color: $new_color;
     background: $new_bgcolor;
-    .meta{
+
+    .meta,
+    .tag {
       color: $new_meta;
     }
   }
-  &.invalid{
+
+  // 无效资源的字条
+  &.invalid {
     color: $invalid_color;
     background: $invalid_bgcolor;
     opacity: .5;
-    .meta,.link{
+
+    .meta,
+    .link,
+    .tag {
       color: $invalid_color
     }
   }
-  &.raw{
+
+  // 尚未翻译的字条
+  &.raw {
     background: $raw_bgcolor;
-    .meta{
+
+    .meta,
+    .tag {
       color: $raw_meta;
     }
-    .link{
+
+    .link {
       color: $raw_color;
     }
   }
+
+
 }

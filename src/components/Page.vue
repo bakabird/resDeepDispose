@@ -6,6 +6,7 @@
         <div class="date" v-if="PostersSorted.length !== 0 && PostersSorted[0].date != '66-66-66'">
             {{dateDescription}} {{PostersSorted[0].date}}
         </div>
+        <div class='postersBox'>
         <template v-for="(i,idx) in PostersSorted">
             <Poster v-if="i.itemType === 'note'" :noShell="i.date === '66-66-66'" :inClamp='i.inClamp !== ""'
                 :key="i.id + '_poster_' + idx" :sqlId="i.id" :mainUrl='i.mainUrl' :date="i.date" :name="i.name"
@@ -18,6 +19,7 @@
                 :sqlId="i.id" :mainUrl='i.mainUrl' :name="i.name" :tag="i.tag" :ep="i.ep" :part="i.part"
                 :index="i.index" :bakedTime="i.bakedTime" :members="i.members" />
         </template>
+        </div>
     </div>
 </template>
 <script>

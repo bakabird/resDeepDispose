@@ -1,13 +1,18 @@
+@import "number";
+
 @import "filter";
 @import "introduction";
 
-@import "bar";
 @import "poster";
+@import "page";
 @import "clamp";
 
 @import "book";
 @import "search";
 
+@import "feedback";
+@import "errorReport";
+@import "clipBoard";
 
 
 #app {
@@ -20,20 +25,24 @@
 html{
   background: #fcfffd;
   // color: rgb(243, 211, 213);
-
+  font-size: 96px;
+  @media screen and (max-width: 960px){
+    font-size: 10vw;
+  }
+  
   #app {
     color: #E4555B;
   }
 }
 
 header{
-  font-size: 12px;
+  @include fb(1);
   margin-top: 12px;
 }
 
 footer{
   margin-top: 30px;
-  font-size: 12px;
+  @include fb(1);
 }
 
 .logo{

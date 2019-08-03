@@ -40,30 +40,3 @@ export default class ClipBoard extends Vue {
     }
 }
 </script>
-<style lang="scss" scoped>
-.clipboard{
-    margin-top: -15px;
-    margin-bottom: 15px;
-}
-.clipboard_row{
-    display: flex;
-    margin-bottom: 1px;
-    flex-wrap: wrap;
-    .clipboard_usearea{
-        width: 70px;
-        color: #ee9a9c;
-    }
-    .clipboard_word{
-        flex: 1;
-        border-right: 1px solid #fcfffd;
-        color: #eb8a8e;
-        background: #fdf0ea;
-    }
-    .clipboard_word:hover{
-        flex: 1;
-        margin-right: 1px;
-        color: #ffd9d9;
-        background: #e95157;
-    }
-}
-</style>

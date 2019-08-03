@@ -7,15 +7,17 @@
     margin: 10px 0px 20px;
     border: 2px solid #ffb9b9;
 
-    .searchBtn {
-        width: 30px;
-        height: 30px;
-        &>svg {
+    .svgWrap{
+        width: 20px;
+        padding-left: 5px;
+        svg {
+            display: block;
             width: 16px;
             height: 30px;
             color: #ffb9b9;
         }
     }
+
 
     .searchInput {
         flex: 1;

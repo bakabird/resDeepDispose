@@ -1,8 +1,5 @@
-$filter_border_color: #ffb9b9;
-$filter_normal_color: #ea8186;
-$filter_active_color: #e7484f;
-$filter_active_bgcolor: #fdf0ea;
-$filter_active_border_color: #dda3a5;
+@import "number";
+@import "color";
 
 .filter {
   display: flex;
@@ -15,11 +12,12 @@ $filter_active_border_color: #dda3a5;
   max-width: 400px;
   flex-wrap: wrap;
   margin: 5px auto;
-  font-size: 12px;
+  margin-bottom: 25px;
   label{
+    @include fb(1);
     margin: 2px 0;
-    height: 1.8em;
-    line-height: 1.8em;
+
+    @include filterLabel;
   }
   .mainItem{
     width: 100%;

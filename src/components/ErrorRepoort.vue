@@ -62,17 +62,3 @@ export default class ErrorRepoort extends Vue {
     }
 }
 </script>
-<style lang="scss" scoped>
-.ErrorReportBtn{
-    background: linear-gradient(130deg, rgb(255, 248, 248) 15%, rgba(255,232,241,1) 50% , rgb(255, 156, 192) 51%, rgb(255, 0, 116) 100%);
-    background-size: 300% 100%;
-    color: #e9757a;
-    position: absolute;
-    font-size: .8em;
-    top: 10px;
-    // border-bottom: 1px solid rgb(221, 163, 165);
-    border-radius: 6px;
-    right: 15px;
-    padding: .2em .6em .3em .6em;
-}
-</style>

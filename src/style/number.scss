@@ -1,0 +1,45 @@
+// font-basic
+
+@mixin fb ($factor){
+    font-size: .15rem * $factor;
+    @media screen and (max-width: 960px){
+        font-size: .18rem * $factor;
+    }
+    @media screen and (max-width: 620px){
+        font-size: .25rem * $factor;
+    }
+    @media screen and (max-width: 375px){
+        font-size: .35rem * $factor;
+    }
+}
+
+@mixin barWidth {
+    // 800 -960 (4col) 200px - 240px
+    width: 2.3rem;
+    // 600 -800 (3col) 200px - 266.666666667px
+    @media screen and (max-width: 800px){
+      width: 3rem;
+    }
+    // 0 -600 (2col) 0px - 300px
+    @media screen and (max-width: 600px){
+      width: 4.3rem;
+    }
+}
+
+@mixin filterLabel {
+    // 800 -960
+    height: 25px;
+    line-height: 25px;
+    // 500 -800
+    @media screen and (max-width: 800px){
+      height: 30px;
+      line-height: 30px;
+      @include fb(1.2);
+    }
+    // 0 -500
+    @media screen and (max-width: 500px){
+      height: 32px;
+      line-height: 32px;
+      @include fb(1.2);
+    }
+}

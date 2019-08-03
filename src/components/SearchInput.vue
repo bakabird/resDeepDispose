@@ -1,6 +1,6 @@
 <template>
     <div class='searchInputWrap'>
-        <div class='searchBtn'>
+        <div class="svgWrap">
             <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-search"></use>
             </svg>

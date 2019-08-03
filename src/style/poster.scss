@@ -1,4 +1,77 @@
 @import "color";
+@import "number";
+
+.bar {
+    position: relative;
+    border-bottom: 2px solid #fff;
+
+    @include barWidth;
+
+    .cover{
+      width: 100%;
+      margin-bottom: 5px;
+      border-radius: 3%;
+      display: block;
+    }
+    .title {
+      display: block;
+      @include fb(1.5);
+      // line-height: $fb * 1.5;
+      font-weight: bold;
+      text-decoration: none; 
+    }
+    &.noShellPoster{
+      .title{
+        @include fb(1.2);
+        // line-height: $fb * 1.2;
+      }
+    }
+
+  .meta {
+    .tag{
+        min-width: 4em;
+        flex: .5;
+        @media screen and (max-width:300px){
+          flex: 1;
+        }
+        padding:0 3px;
+        @include fb(.8);
+    }
+    .from{
+        // min-width: 10em;
+        flex: 1;
+        @include fb(.8);
+    }
+    .members {
+        width: 100%
+    }
+  }
+}
+
+
+
+
+// titleinfo
+.titleMeta {
+    font-size: 12px;
+    opacity: .6;
+}
+
+.meta{
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 12px;
+}
+
+// 时间相关
+
+.tomorrow {
+    opacity: .5;
+}
+
+.theDayAfterTomorrow {
+    opacity: .25;
+}
 
 .poster {
   .link {
@@ -13,12 +86,6 @@
     color: $normal_meta;
   }
 
-
-  &.noShellPoster{
-    .title{
-      font-size: 1em;
-    }
-  }
   &.new{
     color: $new_color;
     background: $new_bgcolor;
@@ -42,24 +109,5 @@
     .link{
       color: $raw_color;
     }
-  }
-}
-
-.meta {
-  .tag{
-      min-width: 4em;
-      flex: .5;
-      @media screen and (max-width:300px){
-        flex: 1;
-      }
-      padding:0 3px;
-  }
-  .from{
-      min-width: 10em;
-      flex: 1;
-  }
-  .members {
-      min-width: 20em;
-      flex: 1;
   }
 }

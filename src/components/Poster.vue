@@ -2,6 +2,7 @@
   <div class="bar poster"
     :class="{ new:!!isNew, raw:!!isRaw, invalid: invalid ,inClamp: inClamp, noShellPoster: noShell}">
     <a class="title link" @click="record(mainUrl)" :href="mainUrl" target="_blank">
+      <img class='cover' src="../assets/bilibili_cover_sample.png" alt="cover sample of bilibili">
       {{name}}
       <span class='titleMeta cut' v-if="!!isCut">[cut]</span>
       <span class='titleMeta part' v-if="!!part">Part {{part}}</span>

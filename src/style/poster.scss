@@ -1,5 +1,6 @@
 @import "color";
 @import "number";
+@import "members";
 
 .bar {
     position: relative;
@@ -15,14 +16,15 @@
     }
     .title {
       display: block;
-      @include fb(1.5);
+      @include fb(1.2);
+      text-align: left;
       // line-height: $fb * 1.5;
       font-weight: bold;
       text-decoration: none; 
     }
     &.noShellPoster{
       .title{
-        @include fb(1.2);
+        @include fb(1);
         // line-height: $fb * 1.2;
       }
     }

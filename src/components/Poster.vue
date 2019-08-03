@@ -17,7 +17,11 @@
         <span class='site' v-else>【{{site}}】</span>
         {{up}}
       </div>
-      <div class="members">{{memberStr}}</div>
+      <div class="members">
+        <template v-for="member in arrMembers">
+          <div class="memberEmoji" :class="'memberEmoji_' + member" :key="`${sqlId}_${member}`"></div>
+        </template>
+      </div>
     </div>
   </div>
 </template>
@@ -38,17 +42,9 @@
       rdd() {
         return this.$store.state.rdd
       },
-      memberStr() {
-        let arr = this.$props.members.split('&')
-        arr = arr.sort(() => {
-          return Math.random() > 0.5 ? -1 : 1
-        })
-        let re = ''
-
-        arr.forEach((i: string) => {
-          re += Vue.members[i]
-        })
-        return re
+      arrMembers() {
+        const arr = this.$props.members.slice
+        return this.$props.members.split('&')
       },
       isNew() {
         return !this.$props.isRaw && now.diff(this.$props.bakedTime, 'hour') < 36

@@ -114,19 +114,20 @@
     overflow: hidden;
     padding: 0 3px;
     text-overflow: ellipsis;
+    padding-top: 1px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     @include fs(1.2);
-    @include eqFs('line-height',1.35);
+    @include eqFs('line-height',1.4);
     @include eqFs('height',1.4 * 2);
   }
 
   &.noShellPoster {
     .title {
       @include fs(1);
-      @include eqFs('line-height',1.05);
-      @include eqFs('max-height',1.1 * 2);
+      @include eqFs('line-height',1.2);
+      @include eqFs('max-height',1.2 * 2);
     }
   }
 

@@ -1,11 +1,20 @@
 const izoneVue: any = {};
 import axios from 'axios'
 
+const checkWebp = function(){
+  try{
+      return (document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') == 0);
+  }catch(err) {
+      return  false;
+  }
+}
+
 izoneVue.install = (Vue: any, options: any) => {
   // 1. 添加全局方法或属性
   Vue.isDev = process.env.NODE_ENV === 'development'
   // production
   Vue.rootPath = process.env.NODE_ENV === 'development' ? 'http://localhost:8360' : '';
+  Vue.canUseWebp = checkWebp()
   // Vue.myGlobalMethod = function () {
   //   // 逻辑...
   // }

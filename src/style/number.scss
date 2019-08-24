@@ -27,8 +27,11 @@
 
 // BUSINESS CODE
 @mixin posterWidth {
+    width: 1.8rem;
     // 800 -960 (4col) 200px - 240px
-    width: 2.23rem;
+    @media screen and (max-width: 960px){
+      width: 2.23rem;
+    }
     // 600 -800 (3col) 200px - 266.666666667px
     @media screen and (max-width: 800px){
       width: 2.9rem;

@@ -9,21 +9,6 @@
 }
 
 
-.meta {
-  display: flex;
-  flex-wrap: wrap;
-  font-size: 12px;
-  .from{
-    @include fs(.9);
-    padding: 0 3px;
-    border-radius: 3px;
-    text-align: left;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-}
-
 // 时间相关
 
 .tomorrow {
@@ -44,12 +29,19 @@
 
   // meta
   .meta {
-    margin-top: 10px;
+    margin-top: 5px;
     color: $normal_meta;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 12px;
   }
   .from {
-    flex: 1;
     @include fs(.8);
+    padding: 0 3px;
+    text-align: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
   .members {
     width: 100%
@@ -72,7 +64,8 @@
   .cover {
     width: 100%;
     margin-bottom: 5px;
-    border-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     display: block;
   }
 
@@ -81,24 +74,39 @@
     bottom: 0;
     height: 34px;
     width: 100%;
-    background: rgba(0, 0, 0, .5);
+    background: rgba(0, 0, 0, .3);
     background: linear-gradient(transparent, transparent, rgba(0, 0, 0, .5));
   }
+  .sumTime{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 12px;
+    line-height: 18px;
+    padding: 0 5px;
+    color: #eee;
+    background-color: rgba(0,0,0,.3);
+    border-top-left-radius: 4px;
+  }
 
-  .tag {
+  .tag,.date{
     bottom: 100%;
-    // background: #ffffff96;
     left: 5%;
     font-size: 12px;
     padding: 0 3px;
-    background: #fdebea;
+    background: linear-gradient(130deg, #fff8f8 15%, #ffe8f1 50%, #ff9cc0 51%, #ff0074 100%);
+    background-size: 300% 100%;
     border-bottom: none;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     position: absolute;
     max-width: 4em;
   }
-
+  .date{
+    left: auto;
+    right: 5%;
+    max-width: calc(90% - 4em - 12px - 3px)
+  }
 
   .title{
     text-align: left;
@@ -141,7 +149,7 @@
     .meta{
       color: $invalid_color
     }
-    .tag {
+    .tag,.date{
       color: $invalid_color;
       background: $invalid_bgcolor;
     }
@@ -159,7 +167,7 @@
       color: $raw_meta;
     }
 
-    .tag {
+    .tag,.date{
       color: $raw_color;
       background: $raw_bgcolor;
     }

@@ -7,6 +7,7 @@ declare module 'vue/types/vue' {
     isDev: boolean
     rootPath: string
     members: any
+    canUseWebp: boolean
     log(...args: any): any;
     error(...args: any): any;
     getNetVal(key: string): Promise<any>

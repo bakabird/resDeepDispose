@@ -6,7 +6,7 @@
         <div class='wonyoungDay' v-else-if="today == '0831'"></div>
         <img class="logo" width="100" v-else src="./assets/iz-one-logo.png">
       </div>
-      <UrgeUpdate>{{announcement}}</UrgeUpdate>
+      <!-- <UrgeUpdate>{{announcement}}</UrgeUpdate> -->
       <form class='filter'>
         <label class='mainItem Fresh' :class="{'itemActived': filter === 'Fresh'}" for="Fresh">
           <input id='Fresh' name='filter' v-model="filter" type='radio' value='Fresh' />最近更新</label>
@@ -48,7 +48,7 @@
   import IzoniBook from './components/IzoniBook.vue';
   import Feedback from './components/Feedback.vue'
   import ErrorRepoort from './components/ErrorRepoort.vue'
-  import UrgeUpdate from "./components/UrgeUpdate.vue"
+  // import UrgeUpdate from "./components/UrgeUpdate.vue"
   import store from 'store'
   import axios from 'axios'
   import moment from 'moment'

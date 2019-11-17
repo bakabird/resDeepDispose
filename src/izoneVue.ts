@@ -21,6 +21,11 @@ izoneVue.install = (Vue: any, options: any) => {
   Vue.getNetVal = (key: string) => {
     return axios.get(`${Vue.rootPath}/util/getVal?key=${key}`)
   }
+  Vue.setNetVal = (key: string,value: string) => {
+    return axios.post(`${Vue.rootPath}/util/setVal`,{
+        key, value
+    })
+  }
 
   Vue.log = (firstArg, ...restArg) => {
     if (Vue.isDev) {

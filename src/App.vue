@@ -2,15 +2,11 @@
   <div id="app">
     <header>
       <div class='introduction'>
-        <div class='birthdayPic' v-if="today === '0801'"></div>
+        <div class='chasewonDay' v-if="today === '0801'"></div>
+        <div class='wonyoungDay' v-else-if="today == '0831'"></div>
         <img class="logo" width="100" v-else src="./assets/iz-one-logo.png">
-        <!-- <div class="new">刚出炉的熟肉呈浅珊瑚色</div>
-        <div class="raw">较难食用的生肉呈墨绿色</div>
-        <div class="clampTip">包含了其他纸条的夹子呈米黄色</div> -->
       </div>
-      <!-- <div>比起弹幕数量更关注弹幕的友善度</div> -->
-      <div>{{announcement}}</div>
-      <!-- <div>个人维护，更新不及时见谅</div> -->
+      <!-- <UrgeUpdate>{{announcement}}</UrgeUpdate> -->
       <form class='filter'>
         <label class='mainItem Fresh' :class="{'itemActived': filter === 'Fresh'}" for="Fresh">
           <input id='Fresh' name='filter' v-model="filter" type='radio' value='Fresh' />最近更新</label>
@@ -52,6 +48,7 @@
   import IzoniBook from './components/IzoniBook.vue';
   import Feedback from './components/Feedback.vue'
   import ErrorRepoort from './components/ErrorRepoort.vue'
+  // import UrgeUpdate from "./components/UrgeUpdate.vue"
   import store from 'store'
   import axios from 'axios'
   import moment from 'moment'

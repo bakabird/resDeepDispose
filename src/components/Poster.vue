@@ -2,7 +2,7 @@
   <div class="poster" :title='name' :class="{ new:!!isNew, raw:!!isRaw, invalid: invalid ,inClamp: inClamp, noShellPoster: noShell}">
     <a class="link" @click="record(mainUrl)" :href="mainUrl" target="_blank">
       <div class="coverBox">
-        <img class='cover' v-if="cover !== ''"          :src="adpatCoverURL(cover)"                      :alt="name+'的封面'">
+        <img class='cover' v-if="cover !== ''"          :src="cover"                      :alt="name+'的封面'">
         <template v-else-if='canUseWebp'>
           <img class='cover' v-if='sampleSeed < .33'      src="../assets/coverSample1.webp" alt="示例封面1">
           <img class='cover' v-else-if='sampleSeed < .66' src="../assets/coverSample2.webp" alt="示例封面2">
@@ -71,9 +71,6 @@
     methods: {
       record(url) {
         this.$record('跳转', this.$props.name, url, this.$props.sqlId)
-      },
-      adpatCoverURL(url){
-        return Vue.rootPath + url
       }
     }
   })

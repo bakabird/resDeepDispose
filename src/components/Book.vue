@@ -2,7 +2,7 @@
   <div class="book">
     <!-- <Page v-for="(P) in Pages" class='dateCard' :key="`${P[0].date}[${P.length}]`" :PageContent='P'/> -->
     <div v-for="Page in Pages"  :key='`page_${Page[0].date}`'>
-      <div class="dateCard" :key='`date_${Page[0].date}`'>{{Page[0].date}}</div>
+      <div class="dateCard" :key='`date_${Page[0].date}`'>{{Page[0].date === "66-66-66" ? "置顶" : Page[0].date}}</div>
       <div class="pageCard">
         <template v-for="(i,idx) in sortPage(Page)">
           <Poster v-if="i.itemType === 'note'" :noShell="i.date === '66-66-66'" :inClamp='i.inClamp !== ""'

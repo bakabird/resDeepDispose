@@ -6,15 +6,22 @@
   .book{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    .datePoster{
-      border-radius: 5px;
-      color: #a58a78;
-      background: #f5eee887;
-      @include fs(1);
-      @include datePosterWidth;
-      margin-bottom: 10px;
-      line-height: 100%;
+    flex-direction: row;
+    .dateCard{
+      margin-bottom: 30px;
+      font-size: 20px;
+      /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffffff+8,fdf0eb+47,fdf0eb+53,ffffff+100 */
+      background: #ffffff; /* Old browsers */
+      background: -moz-linear-gradient(left,  #ffffff 8%, #fdf0eb 47%, #fdf0eb 53%, #ffffff 100%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(left,  #ffffff 8%,#fdf0eb 47%,#fdf0eb 53%,#ffffff 100%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to right,  #ffffff 8%,#fdf0eb 47%,#fdf0eb 53%,#ffffff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 */
+    }
+    .pageCard{
+      flex-direction: row;
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
     }
   }
 }

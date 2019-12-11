@@ -2,6 +2,7 @@
   <div class="poster" :title='name' :class="{ new:!!isNew, raw:!!isRaw, invalid: invalid ,inClamp: inClamp, noShellPoster: noShell}">
     <a class="link" @click="record(mainUrl)" :href="mainUrl" target="_blank">
       <div class="coverBox">
+        <div class="tag">{{tag}}</div>
         <img class='cover' v-if="cover !== ''"          :src="cover"                      :alt="name+'的封面'">
         <template v-else-if='canUseWebp'>
           <img class='cover' v-if='sampleSeed < .33'      src="../assets/coverSample1.webp" alt="示例封面1">
@@ -14,8 +15,7 @@
           <img class='cover' v-else                       src="../assets/coverSample3.jpg" alt="示例封面3">
         </template>
         
-        <div class="tag">{{tag}}</div>
-        <div class="date">{{date}}</div>
+        <!-- <div class="date">{{date}}</div> -->
         <div class="mask">
           <div class='sumTime'>{{durationStr}}</div>
         </div>

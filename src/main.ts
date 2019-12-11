@@ -3,6 +3,7 @@ import App from './App.vue'
 import store from './store'
 import izoneVue from './izoneVue'
 import './style/style.scss'
+import './assets/css/normalize.min.css'
 import './assets/icon-font/iconfont.css'
 import './assets/icon-font/iconfont.js'
 

@@ -27,18 +27,24 @@
 
 // BUSINESS CODE
 @mixin posterWidth {
-    width: 1.8rem;
+    width: 2.25rem; // 9.2
+    margin-left: calc(.8rem/5);
     // 800 -960 (4col) 200px - 240px
-    @media screen and (max-width: 960px){
-      width: 2.23rem;
+    @media screen and (max-width: 990px){
+        width: 2.25rem; // 9.2
+        margin-left: calc(.8rem/5);
+      // padding-left: ((0.5rem+ 1px)/5); 
+      // padding-left: .15rem;
     }
     // 600 -800 (3col) 200px - 266.666666667px
     @media screen and (max-width: 800px){
-      width: 2.9rem;
+        width: (3rem);
+        margin-left: calc(1rem/4);
     }
     // 0 -600 (2col) 0px - 300px
     @media screen and (max-width: 600px){
       width: 4.5rem;
+      margin-left: calc(1rem/3);
     }
 }
 @mixin datePosterWidth {

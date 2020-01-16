@@ -17,9 +17,9 @@
 }
 
 .inClamp{
-    border-left: 10px solid $clamp_open_bgcolor;
-    border-right: 10px solid $clamp_open_bgcolor;
     border-bottom: none;
+    background: $inclamp_bgcolor;
+    border-bottom: 1px solid $inclamp_borderColor;
 }
 
 .clamp {

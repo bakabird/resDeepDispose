@@ -154,6 +154,7 @@ export default class IzoniBook extends Vue {
                     size,
                     total
                 } = re.data.data
+
                 if (version === this.localPage().version) {
                     Vue.log(`merge local pages on updatePage`)
                     const oldPages = this.Pages.map(page => page.map(poster => poster))
@@ -192,6 +193,7 @@ export default class IzoniBook extends Vue {
                 total
             } = re.data.data
             Vue.log(`update local pages on updatePage`)
+
 
             this.Pages = pages
             this.total = total

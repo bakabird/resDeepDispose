@@ -1,6 +1,6 @@
 <template>
-  <div class="poster" :title='name' :class="{ new:!!isNew, raw:!!isRaw, invalid: invalid ,inClamp: inClamp, noShellPoster: noShell}">
-    <a class="link" @click="record(mainUrl)" :href="mainUrl" target="_blank">
+  <div class="poster" :title='name' :class="{ new:!!isNew, raw:!!isRaw, clamp: itemType === 'clamp' , invalid: invalid ,inClamp: inClamp, noShellPoster: noShell}">
+    <a class="link" @click="onClickCard" href="javascript:void">
       <div class="coverBox">
         <div class="tag">{{tag}}</div>
         <img class='cover' v-if="cover !== ''"          :src="cover"                      :alt="name+'的封面'">
@@ -16,7 +16,7 @@
         </template>
         
         <!-- <div class="date">{{date}}</div> -->
-        <div class="mask">
+        <div class="mask" v-if="itemType == 'note'">
           <div class='sumTime'>{{durationStr}}</div>
         </div>
       </div>
@@ -32,12 +32,14 @@
             <div class="memberEmoji" :class="'memberEmoji_' + member" :key="`${sqlId}_${member}`"></div>
           </template>
         </div>
-        <div class="from">
-          <span class='siteIcon'
-            :class="{ [`siteIcon_${site}`]: true, [`siteIcon_${site}Raw`]: !!isRaw, [`siteIcon_${site}Invalid`]: invalid }"
-            v-if="supportIconSites.includes(site)"></span>
-          <span class='site' v-else>【{{site}}】</span>
-          {{up}}
+        <div class="from" >
+          <template v-if="itemType == 'note'">
+            <span class='siteIcon'
+              :class="{ [`siteIcon_${site}`]: true, [`siteIcon_${site}Raw`]: !!isRaw, [`siteIcon_${site}Invalid`]: invalid }"
+              v-if="supportIconSites.includes(site)"></span>
+            <span class='site' v-else>【{{site}}】</span>
+            {{up}}
+          </template>
         </div>
       </div>
     </a>
@@ -67,11 +69,6 @@
       isNew() {
         return !this.$props.isRaw && now.diff(this.$props.bakedTime, 'hour') < 36
       }
-    },
-    methods: {
-      record(url) {
-        this.$record('跳转', this.$props.name, url, this.$props.sqlId)
-      }
     }
   })
   export default class Poster extends Vue {
@@ -80,6 +77,7 @@
     private durationStr: string = ""
 
     @Prop() private sqlId!: string;
+    @Prop() private itemType!: string;
 
     @Prop() private mainUrl!: string;
     @Prop() private date!: string;
@@ -120,6 +118,25 @@
       let SS = (seconds < 10 ? "0" : '') + seconds
 
       this.durationStr = HH === "00" ?  `${MM}:${SS}` : `${HH}:${MM}:${SS}`
+    }
+    _record(url) {
+        this.$record('点击', this.$props.name, url, this.$props.sqlId)
+    }
+    _jumpTo(url){
+      window.open(url)
+    }
+    _popClamp(id){
+      this.$store.commit('setPopClampId',id)
+    }
+    onClickCard(){
+      const url = this.mainUrl
+      const id = this.sqlId
+      this._record(url)
+      if(this.itemType === 'note'){
+        this._jumpTo(url)
+      }else if(this.itemType === 'clamp'){
+        this._popClamp(id)
+      }
     }
 
     private readonly supportIconSites: string[] = ['B站', '微博', 'Vlive', 'Youtube']

@@ -1,25 +1,32 @@
 $normal_color: #E4555B;
 $normal_bgcolor: #FAFAFA;
 $normal_borderColor: #eac2c3;
+$normal_meta: #CE5C61;
 
 $new_color: #dc4c65;
 $new_bgcolor: #fdebea;
+$new_meta: #dc4c65;
 
 $raw_color: #9cb599;
 $raw_bgcolor: #f0f4ee;
 $raw_borderColor: #c3d4c1;
+$raw_tag_color: linear-gradient(to right, #ffffff00 8%, #ecffea 47%, #ecffea 53%, #ffffff00 100%);
+$raw_meta: #acba8c;
 
-$invalid_color: #b9b9b9;
+$invalid_color: #898989;
 $invalid_bgcolor: #efefef;
+$invalid_tag_color: linear-gradient(to right, #ffffff00 8%, #efefef 47%, #efefef 53%, #ffffff00 100%);
 
 $clamp_color: #d8a67a;
 $clamp_bgcolor: #fffaf1;
+$clamp_borderColor: #d8b89c;
 $clamp_open_color: #ed8b43;
+$clamp_tag_color: linear-gradient(to right, #ffffff00 8%, #fffaf1 47%, #fffaf1 53%, #ffffff00 100%);
+$clamp_meta: #d8a67a;
 $clamp_open_bgcolor: #fff0d9;
 
-$normal_meta: #CE5C61;
-$raw_meta: #acba8c;
-$new_meta: #dc4c65;
+$inclamp_borderColor:#f8cca5;
+$inclamp_bgcolor:#fffbf4;
 
 $last_poster_border-bottom: #c9bccc;
 

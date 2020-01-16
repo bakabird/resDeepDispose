@@ -36,6 +36,7 @@
     <Feedback/>
     <ErrorRepoort/>
     <IzoniBook :filter='filter' />
+    <PopPage/>
     <footer>- 暂由RDD个人维护 -</footer>
   </div>
 </template>
@@ -48,6 +49,7 @@
   import IzoniBook from './components/IzoniBook.vue';
   import Feedback from './components/Feedback.vue'
   import ErrorRepoort from './components/ErrorRepoort.vue'
+  import PopPage from './components/PopPage.vue'
   // import UrgeUpdate from "./components/UrgeUpdate.vue"
   import store from 'store'
   import axios from 'axios'
@@ -64,7 +66,7 @@
       }
     },
     components: {
-      IzoniBook, Feedback, ErrorRepoort
+      IzoniBook, Feedback, ErrorRepoort, PopPage
     },
     watch: {
       filter(to, from) {

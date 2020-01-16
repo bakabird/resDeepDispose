@@ -42,6 +42,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    min-height: 15px;
   }
   .members {
     width: 100%
@@ -94,17 +95,16 @@
     margin: 0 auto;
     position: absolute;
     left: 10%;
-    top: -17px;
-    font-size: 12px;
+    top: -20px;
+    font-size: 14px;
     padding: 0 3px;
-    background: linear-gradient(130deg, #fff8f8 15%, #ffe8f1 50%, #ff9cc0 51%, #ff0074 100%);
     background-size: 300% 100%;
     border-bottom: none;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     width: 75%;
     margin-bottom: 5px;
-    background: linear-gradient(to right, #ffffff 8%, #ffdde9 47%, #ffdde9 53%, #ffffff 100%);
+    background: linear-gradient(to right, #ffffff00 8%, #ffdde9 47%, #ffdde9 53%, #ffffff00 100%);
   }
   .date{
     left: auto;
@@ -156,10 +156,29 @@
     }
     .tag,.date{
       color: $invalid_color;
-      background: $invalid_bgcolor;
+      background: $invalid_tag_color;
     }
     .link{
       color: $invalid_color
+    }
+  }
+
+  // 夹子字条
+  &.clamp{
+    background: $clamp_bgcolor;
+    border-bottom: 1px solid $clamp_borderColor;
+  
+    .meta{
+      color: $clamp_meta;
+    }
+  
+    .tag,.date{
+      color: $clamp_color;
+      background: $clamp_tag_color;
+    }
+  
+    .title{
+      color: $clamp_color
     }
   }
 
@@ -174,7 +193,7 @@
 
     .tag,.date{
       color: $raw_color;
-      background: $raw_bgcolor;
+      background: $raw_tag_color;
     }
 
     .title{

@@ -11,7 +11,6 @@
 <script lang='ts'>
 import { Component, Vue } from 'vue-property-decorator';
 import { IZONEClipBoard } from '../DistInterface';
-import axios from 'axios'
 import PopOut from './PopOut.vue'
 
 @Component({components: {PopOut}})

@@ -19,7 +19,6 @@
         Vue,
         Emit
     } from 'vue-property-decorator';
-    import axios from 'axios'
 
     const URGE_POWER = "URGE_POWER"
 

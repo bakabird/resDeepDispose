@@ -23,7 +23,7 @@ import {
     Vue
 } from 'vue-property-decorator';
 import PopOut from './PopOut.vue'
-import axios from 'axios'
+
 
 @Component({
     components: { PopOut }
@@ -37,10 +37,7 @@ export default class Feedback extends Vue {
     private uploadFeedback() {
         if (this.value !== '') {
             this.step = 1
-            axios.post(Vue.rootPath + '/util/setVal/', {
-                key: `IZONIFEEDBACK_${Date.now()}`,
-                string: this.value
-            }).then((re) => {
+            Vue.setNetVal(`FEEDBACK_${Vue.domain}_${Date.now()}`,this.value).then((re) => {
                 this.step = re.data.errno === 0 ? 2 : 3
                 setTimeout(() => {
                     this.signal = this.signal + 1

@@ -13,6 +13,7 @@ izoneVue.install = (Vue: any, options: any) => {
   // 1. 添加全局方法或属性
   Vue.isDev = process.env.NODE_ENV === 'development'
   // production
+  Vue.domain = "izone";
   Vue.rootPath = process.env.NODE_ENV === 'development' ? 'http://localhost:8360' : '';
   Vue.canUseWebp = checkWebp()
   // Vue.myGlobalMethod = function () {
@@ -31,8 +32,12 @@ izoneVue.install = (Vue: any, options: any) => {
   Vue.setNetVal = (key: string, value: string) => {
     return axios.post(`${Vue.rootPath}/util/setVal`, {
       key,
-      value
+      string: value
     })
+  }
+  
+  Vue.getMsg = (serviceName: string, pac: any) => {
+    return axios.post(Vue.rootPath + `/${Vue.domain}/${serviceName}`, pac)
   }
 
   Vue.log = (firstArg, ...restArg) => {

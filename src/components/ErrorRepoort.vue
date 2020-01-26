@@ -13,13 +13,13 @@ import {
     Component,
     Vue
 } from 'vue-property-decorator';
-import axios from 'axios'
 import PopOut from './PopOut.vue'
 import store from 'store'
 
 @Component({
     components: { PopOut }
 })
+
 
 export default class ErrorRepoort extends Vue {
     private value: string = ''
@@ -44,10 +44,7 @@ export default class ErrorRepoort extends Vue {
         store.each((value, key) => {
             LocalStore[key] = value
         })
-        axios.post(Vue.rootPath + '/util/setVal', {
-            key: `IZONIREPORT${Date.now()}_${navigator.appName}`,
-            string: JSON.stringify(LocalStore)
-        }).then(re => {
+        Vue.setNetVal(`REPORT_${Vue.domain}_${Date.now()}_${navigator.appName}`,JSON.stringify(LocalStore)).then(re => {
             if (re.data.errno === 0) {
                 this.step = this.step + 1
                 store.clearAll()

@@ -16,7 +16,6 @@ import {
     Vue
 } from 'vue-property-decorator';
 
-import axios from 'axios'
 import store from 'store'
 
 import paging from './paging'
@@ -120,7 +119,7 @@ export default class IzoniBook extends Vue {
         this.total = localPage.total
         this.Pages = localPage.pages
 
-        axios.post(Vue.rootPath + '/izone/needToFetch', {
+        Vue.getMsg("needToFetch",{
             version
         }).then(re => {
             const shouldUpdate = re.data.data
@@ -142,7 +141,7 @@ export default class IzoniBook extends Vue {
         if (!this.waitForTurnPage) {
             this.waitForTurnPage = true
             const query = this.query
-            axios.post(Vue.rootPath + `/izone/page`, {
+            Vue.getMsg("page",{
                 from: this.size,
                 size: 25,
                 query,
@@ -182,7 +181,7 @@ export default class IzoniBook extends Vue {
     }
     private updatePage() {
         const query = this.query
-        axios.post(Vue.rootPath + '/izone/page1', {
+        Vue.getMsg("page1",{
             size: 25,
             query
         }).then((re) => {
